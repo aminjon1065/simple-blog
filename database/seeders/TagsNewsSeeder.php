@@ -13,6 +13,8 @@ class TagsNewsSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Tag::with('news')->factory(100)->create();
+        // Create tags and attach generated news to each tag.
+        // TagFactory::withNews will create related News (if News factory exists) and attach them.
+        \App\Models\Tag::factory()->count(100)->withNews(2)->create();
     }
 }

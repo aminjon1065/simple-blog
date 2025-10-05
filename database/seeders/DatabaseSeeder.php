@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(1)->create();
         // Category::factory(10)->create();
         // News::factory(50)->create();
-        // Tag::factory(20)->create();
+        Tag::factory(20)->create();
 
     }
 }

@@ -1,4 +1,6 @@
-const Article = ({newsData}) => {
+import { Link } from "@inertiajs/react";
+
+const Article = ({ article }) => {
     return (
         <article>
             <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
@@ -6,7 +8,14 @@ const Article = ({newsData}) => {
                     <dt className="sr-only">Опубликовано</dt>
                     <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
                         <time dateTime="2023-08-05T00:00:00.000Z">
-                            August 5, 2023
+                            {new Date(article.published_at).toLocaleDateString(
+                                'ru-RU',
+                                {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric',
+                                },
+                            )}
                         </time>
                     </dd>
                 </dl>
@@ -18,46 +27,33 @@ const Article = ({newsData}) => {
                                     href="article-sidebar.html"
                                     className="text-gray-900 dark:text-gray-100"
                                 >
-                                    Article with sidebar
+                                    {article.title}
                                 </a>
                             </h2>
                             <div className="flex flex-wrap">
-                                <a
-                                    href="#"
-                                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
-                                >
-                                    HTML
-                                </a>
-                                <a
-                                    href="#"
-                                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
-                                >
-                                    JS
-                                </a>
-                                <a
-                                    href="#"
-                                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
-                                >
-                                    PHP
-                                </a>
+                                {article.tags.map((tag) => (
+                                    <a
+                                        key={tag.id}
+                                        href="#"
+                                        className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
+                                    >
+                                        {tag.name}
+                                    </a>
+                                ))}
                             </div>
                         </div>
                         <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip
-                            ex ea commodo consequat.
+                            {article.content}
                         </div>
                     </div>
                     <div className="text-base leading-6 font-medium">
-                        <a
+                        <Link
                             href="article-sidebar.html"
                             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             aria-label="Read article"
                         >
-                            Read more &rarr;
-                        </a>
+                            Прочиать &rarr;
+                        </Link>
                     </div>
                 </div>
             </div>
