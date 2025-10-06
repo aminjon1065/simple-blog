@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react";
+import { Link } from '@inertiajs/react';
 
 const Article = ({ article }) => {
     return (
@@ -23,12 +23,12 @@ const Article = ({ article }) => {
                     <div className="space-y-6">
                         <div>
                             <h2 className="text-2xl leading-8 font-bold tracking-tight">
-                                <a
-                                    href="article-sidebar.html"
+                                <Link
+                                    href={`/news/${article.slug}`}
                                     className="text-gray-900 dark:text-gray-100"
                                 >
                                     {article.title}
-                                </a>
+                                </Link>
                             </h2>
                             <div className="flex flex-wrap">
                                 {article.tags.map((tag) => (
@@ -48,7 +48,7 @@ const Article = ({ article }) => {
                     </div>
                     <div className="text-base leading-6 font-medium">
                         <Link
-                            href="article-sidebar.html"
+                            href={`/news/${article.slug}`}
                             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             aria-label="Read article"
                         >

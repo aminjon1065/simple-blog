@@ -79,19 +79,19 @@ export default function MainLayout({
                                 >
                                     Новости
                                 </Link>
-                                <a
-                                    href="tags.html"
+                                <Link
+                                    href="tags"
                                     className="hidden font-medium text-gray-900 sm:block dark:text-gray-100"
                                 >
                                     Теги
-                                </a>
+                                </Link>
 
-                                <a
-                                    href="about.html"
+                                <Link
+                                    href="/about"
                                     className="hidden font-medium text-gray-900 sm:block dark:text-gray-100"
                                 >
                                     О нас
-                                </a>
+                                </Link>
                                 <button aria-label="Search">
                                     <Search className="h-6 w-6 text-gray-900 dark:text-gray-100" />
                                 </button>

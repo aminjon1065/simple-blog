@@ -1,3 +1,6 @@
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+
 const Footer = () => {
     return (
         <footer>
@@ -118,7 +121,12 @@ const Footer = () => {
                 </div>
                 <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
                     <div>
-                        <a href="https://github.com/aminjon1065" target="_blank">Автор</a>
+                        <a
+                            href="https://github.com/aminjon1065"
+                            target="_blank"
+                        >
+                            Автор
+                        </a>
                     </div>
                     <div>•</div>
                     <div>{new Date().getFullYear()}</div>
@@ -126,7 +134,10 @@ const Footer = () => {
                     <a href="/">SilentNoir блог</a>
                 </div>
                 <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
-                    <a href="#">Tailwind HTML Theme</a>
+                    <div className="text-center">
+                        <Label htmlFor='subscribe'>Подписаться</Label>
+                        <Input id='subscribe' type="email" className='text-center' placeholder='email@example.com' />
+                    </div>
                 </div>
             </div>
         </footer>

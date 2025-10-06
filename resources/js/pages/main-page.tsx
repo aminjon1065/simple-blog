@@ -2,7 +2,6 @@ import Article from '@/components/article';
 import MainLayout from '@/layouts/app/main-layout';
 
 const MainPage = ({ news }) => {
-    console.log(news);
     return (
         <MainLayout>
             <div className="divide-y divide-gray-200 dark:divide-gray-700">

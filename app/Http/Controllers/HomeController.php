@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $news = News::with('category', 'author', 'tags')->latest('id')->take(10)->get();
+        $news = News::with('category', 'author', 'tags')->latest('published_at')->take(10)->get();
         return Inertia::render('main-page', [
             'news' => $news
         ]);
