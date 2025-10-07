@@ -1,5 +1,8 @@
 import Article from '@/components/article';
+import { Button } from '@/components/ui/button';
 import MainLayout from '@/layouts/app/main-layout';
+import { Link } from '@inertiajs/react';
+import { ArrowRight } from 'lucide-react';
 
 const MainPage = ({ news }) => {
     return (
@@ -23,13 +26,20 @@ const MainPage = ({ news }) => {
                 </ul>
             </div>
             <div className="flex justify-end text-base leading-6 font-medium">
-                <a
-                    href="blog.html"
+                <Link
+                    as={Button}
+                    variant="link"
+                    href={`/news`}
                     className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    aria-label="All posts"
+                    rel="prev"
                 >
-                    All Posts &rarr;
-                </a>
+                    <div className="group flex items-center justify-center space-x-2">
+                        <span className="transform transition-transform duration-200 ease-in-out group-hover:-translate-x-1 text-xl">
+                            Все посты
+                        </span>
+                        <ArrowRight className="h-4 w-4 transform transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                    </div>
+                </Link>
             </div>
         </MainLayout>
     );
