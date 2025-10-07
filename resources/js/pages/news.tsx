@@ -1,10 +1,7 @@
-import Article from '@/components/article';
 import ArticleNews from '@/components/article-news';
 import MainLayout from '@/layouts/app/main-layout';
+import { Link } from '@inertiajs/react';
 const News = ({ news, categories }) => {
-    console.log('category', categories);
-    console.log('news', news);
-
     return (
         <MainLayout>
             <div>
@@ -37,24 +34,34 @@ const News = ({ news, categories }) => {
                     <div>
                         <ul>
                             {news.data.map((article) => (
-                                <ArticleNews key={article.id} article={article}/>
+                                <ArticleNews
+                                    key={article.id}
+                                    article={article}
+                                />
                             ))}
                         </ul>
 
                         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
                             <nav className="flex justify-between">
-                                <button
-                                    className="cursor-auto disabled:opacity-50"
-                                    disabled
+                                <Link
+                                    disabled={!!news.prev_page_url}
+                                    href={
+                                        news.prev_page_url
+                                            ? news.prev_page_url
+                                            : '#'
+                                    }
+                                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                                    rel="prev"
                                 >
-                                    Previous
-                                </button>
+                                    &larr; Previous
+                                </Link>
+                                <span>
+                                    {news.current_page} of {news.links.length}
+                                </span>
 
-                                <span>1 of 2</span>
-
-                                <a href="#" rel="next">
+                                <Link href={news.next_page_url} rel="next">
                                     Next
-                                </a>
+                                </Link>
                             </nav>
                         </div>
                     </div>

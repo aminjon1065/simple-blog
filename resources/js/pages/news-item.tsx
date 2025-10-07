@@ -70,7 +70,7 @@ const NewsItem = () => {
                                         <a
                                             href="#nested-routes"
                                             aria-hidden="true"
-                                            tabindex="-1"
+                                            tabIndex={-1}
                                         >
                                             <span className="icon icon-link"></span>
                                         </a>
@@ -91,7 +91,7 @@ const NewsItem = () => {
                                         <a
                                             href="#how"
                                             aria-hidden="true"
-                                            tabindex="-1"
+                                            tabIndex={-1}
                                         >
                                             <span className="icon icon-link"></span>
                                         </a>
@@ -115,7 +115,7 @@ const NewsItem = () => {
                                         <a
                                             href="#use-cases"
                                             aria-hidden="true"
-                                            tabindex="-1"
+                                            tabIndex={-1}
                                         >
                                             <span className="icon icon-link"></span>
                                         </a>
@@ -152,7 +152,7 @@ const NewsItem = () => {
                                         <a
                                             href="#note"
                                             aria-hidden="true"
-                                            tabindex="-1"
+                                            tabIndex={-1}
                                         >
                                             <span className="icon icon-link"></span>
                                         </a>

@@ -1,4 +1,6 @@
-const ArticleNews = ({article}) => {
+import { Link } from 'lucide-react';
+
+const ArticleNews = ({ article }) => {
     return (
         <li className="py-5">
             <article className="flex flex-col space-y-2 xl:space-y-0">
@@ -28,42 +30,19 @@ const ArticleNews = ({article}) => {
                             </a>
                         </h2>
                         <div className="flex flex-wrap">
-                            {
-                                article.tags.map((tag) => (
-                                    <a
-                                href="#"
-                                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
-                            >
-                                {tag.name}
-                            </a>
-                                ))
-                            }
-                            <a
-                                href="#"
-                                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
-                            >
-                                HTML
-                            </a>
-                            <a
-                                href="#"
-                                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
-                            >
-                                JS
-                            </a>
-                            <a
-                                href="#"
-                                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
-                            >
-                                PHP
-                            </a>
+                            {article.tags.map((tag) => (
+                                <Link
+                                    key={tag.id}
+                                    href="#"
+                                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
+                                >
+                                    {tag.name}
+                                </Link>
+                            ))}
                         </div>
                     </div>
                     <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat.
+                        <span className="decoration-2 text-truncate">{article.content}</span>
                     </div>
                 </div>
             </article>
