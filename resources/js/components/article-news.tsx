@@ -1,5 +1,5 @@
 import { NewsItem } from '@/types/news';
-import { Link } from 'lucide-react';
+import { Link } from '@inertiajs/react';
 
 const ArticleNews = ({ article }:{article:NewsItem}) => {
     return (
@@ -23,12 +23,12 @@ const ArticleNews = ({ article }:{article:NewsItem}) => {
                 <div className="space-y-3">
                     <div>
                         <h2 className="text-2xl leading-8 font-bold tracking-tight">
-                            <a
-                                href="article-sidebar.html"
-                                className="text-gray-900 dark:text-gray-100"
+                            <Link
+                                href="#"
+                                className="text-gray-900 dark:text-gray-100 text-truncate"
                             >
                                 {article.title}
-                            </a>
+                            </Link>
                         </h2>
                         <div className="flex flex-wrap">
                             {article.tags.map((tag) => (

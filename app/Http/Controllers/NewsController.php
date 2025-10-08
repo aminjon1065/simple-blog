@@ -12,7 +12,16 @@ class NewsController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $news = News::with(['tags', 'category', 'author'])->orderBy('published_at', 'desc')->paginate(10);
+        $search = request('search');
+        if ($search) {
+            $news = News::with(['tags', 'category', 'author'])
+                ->where('title', 'like', '%' . $search . '%')
+                ->orWhere('content', 'like', '%' . $search . '%')
+                ->orderBy('published_at', 'desc')
+                ->paginate(10);
+        } else {
+            $news = News::with(['tags', 'category', 'author'])->orderBy('published_at', 'desc')->paginate(10);
+        }
         return Inertia::render('news', [
             'news' => $news,
             'categories' => $categories
