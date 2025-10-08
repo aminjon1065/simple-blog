@@ -1,6 +1,9 @@
 import { Link } from '@inertiajs/react';
+import { ArrowRight } from 'lucide-react';
+import { Button } from './ui/button';
+import { NewsItem } from '@/types/news';
 
-const Article = ({ article }) => {
+const Article = ({ article }: {article:NewsItem}) => {
     return (
         <article>
             <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
@@ -8,7 +11,7 @@ const Article = ({ article }) => {
                     <dt className="sr-only">Опубликовано</dt>
                     <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
                         <time dateTime="2023-08-05T00:00:00.000Z">
-                            {new Date(article.published_at).toLocaleDateString(
+                            {new Date(`${article.published_at}`).toLocaleDateString(
                                 'ru-RU',
                                 {
                                     year: 'numeric',
@@ -48,11 +51,18 @@ const Article = ({ article }) => {
                     </div>
                     <div className="text-base leading-6 font-medium">
                         <Link
+                            as={Button}
+                            variant="link"
                             href={`/news/${article.slug}`}
                             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                            aria-label="Read article"
+                            rel="prev"
                         >
-                            Прочиать &rarr;
+                            <div className="group flex items-center justify-center space-x-2">
+                                <span className="transform transition-transform duration-200 ease-in-out group-hover:-translate-x-1">
+                                    Прочитать
+                                </span>
+                                <ArrowRight className="h-4 w-4 transform transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                            </div>
                         </Link>
                     </div>
                 </div>

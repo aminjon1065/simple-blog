@@ -1,7 +1,8 @@
 import Footer from '@/components/footer';
+import SearchMain from '@/components/search-main';
 import { initializeTheme, useAppearance } from '@/hooks/useAppearance';
 import { Link } from '@inertiajs/react';
-import { FeatherIcon, MoonIcon, Search, SunIcon } from 'lucide-react';
+import { FeatherIcon, MoonIcon, SunIcon } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 
 export default function MainLayout({
@@ -58,7 +59,7 @@ export default function MainLayout({
         <>
             <div className="bg-white text-black antialiased dark:bg-gray-950 dark:text-white">
                 <section className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">
-                    <div className="flex h-screen flex-col justify-between font-sans">
+                    <div className="flex min-h-screen flex-col justify-between font-sans">
                         <header className="flex items-center justify-between py-10">
                             <div>
                                 <Link href="/" aria-label="Header title">
@@ -74,12 +75,14 @@ export default function MainLayout({
                             </div>
                             <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
                                 <Link
+                                    prefetch
                                     href={'/news'}
                                     className="hidden font-medium text-gray-900 sm:block dark:text-gray-100"
                                 >
                                     Новости
                                 </Link>
                                 <Link
+                                    prefetch
                                     href="tags"
                                     className="hidden font-medium text-gray-900 sm:block dark:text-gray-100"
                                 >
@@ -87,15 +90,15 @@ export default function MainLayout({
                                 </Link>
 
                                 <Link
+                                    prefetch
                                     href="/about"
                                     className="hidden font-medium text-gray-900 sm:block dark:text-gray-100"
                                 >
                                     О нас
                                 </Link>
-                                <button aria-label="Search">
-                                    <Search className="h-6 w-6 text-gray-900 dark:text-gray-100" />
-                                </button>
+                                <SearchMain />
                                 <button
+                                    className="cursor-pointer rounded-md border px-3 py-2"
                                     aria-label="Toggle Dark Mode"
                                     onClick={() =>
                                         updateAppearance(
@@ -177,6 +180,7 @@ export default function MainLayout({
                                     <nav className="fixed mt-8">
                                         <div className="px-12 py-4">
                                             <Link
+                                                prefetch
                                                 href="/news"
                                                 className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
                                                 onClick={() =>
@@ -187,7 +191,7 @@ export default function MainLayout({
                                             </Link>
                                         </div>
                                         <div className="px-12 py-4">
-                                            <a
+                                            <Link
                                                 href="/tags"
                                                 className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
                                                 onClick={() =>
@@ -195,11 +199,11 @@ export default function MainLayout({
                                                 }
                                             >
                                                 Теги
-                                            </a>
+                                            </Link>
                                         </div>
 
                                         <div className="px-12 py-4">
-                                            <a
+                                            <Link
                                                 href="/about"
                                                 className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
                                                 onClick={() =>
@@ -207,7 +211,7 @@ export default function MainLayout({
                                                 }
                                             >
                                                 О нас
-                                            </a>
+                                            </Link>
                                         </div>
                                     </nav>
                                 </div>
