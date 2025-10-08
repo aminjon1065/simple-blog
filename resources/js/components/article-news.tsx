@@ -1,6 +1,7 @@
+import { NewsItem } from '@/types/news';
 import { Link } from 'lucide-react';
 
-const ArticleNews = ({ article }) => {
+const ArticleNews = ({ article }:{article:NewsItem}) => {
     return (
         <li className="py-5">
             <article className="flex flex-col space-y-2 xl:space-y-0">
@@ -8,7 +9,7 @@ const ArticleNews = ({ article }) => {
                     <dt className="sr-only">Published on</dt>
                     <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
                         <time dateTime="2021-08-07T15:32:14.000Z">
-                            {new Date(article.published_at).toLocaleDateString(
+                            {new Date(`${article.published_at}`).toLocaleDateString(
                                 'ru-RU',
                                 {
                                     year: 'numeric',

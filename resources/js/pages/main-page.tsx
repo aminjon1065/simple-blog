@@ -1,7 +1,8 @@
 import Article from '@/components/article';
 import MainLayout from '@/layouts/app/main-layout';
+import { NewsItem } from '@/types/news';
 
-const MainPage = ({ news }) => {
+const MainPage = ({ news }: { news: NewsItem[] }) => {
     return (
         <MainLayout>
             <div className="divide-y divide-gray-200 dark:divide-gray-700">

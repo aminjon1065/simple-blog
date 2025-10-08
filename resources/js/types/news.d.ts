@@ -52,6 +52,7 @@ export type NewsItem = {
     meta_description?: string | null;
     views?: number;
     status?: number | boolean;
+    tags?: Tag[] | null; // assuming tags is an array of Tag objects
 };
 
 export type PaginatedNews = {
