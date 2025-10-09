@@ -10,11 +10,19 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import {  home } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import {
+    ChartBarStacked,
+    Github,
+    LayoutGrid,
+    MailPlus,
+    MessageCircle,
+    Newspaper,
+} from 'lucide-react';
 import AppLogo from './app-logo';
+import { dashboard } from '@/routes/admin';
 
 const mainNavItems: NavItem[] = [
     {
@@ -22,18 +30,33 @@ const mainNavItems: NavItem[] = [
         href: dashboard(),
         icon: LayoutGrid,
     },
+    {
+        title: 'Категоия',
+        href: '/admin/categories',
+        icon: ChartBarStacked,
+    },
+    {
+        title: 'Новости',
+        href: '/admin/news',
+        icon: Newspaper,
+    },
+    {
+        title: 'Комментарии',
+        href: '/admin/comments',
+        icon: MessageCircle,
+    },
+    {
+        title: 'Подписались',
+        href: '/admin/subscriptions',
+        icon: MailPlus,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
+        href: 'https://github.com/aminjon1065/simple-blog',
+        icon: Github,
     },
 ];
 
@@ -44,7 +67,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href={dashboard()} prefetch>
+                            <Link href={home()} prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>

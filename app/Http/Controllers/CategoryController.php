@@ -11,4 +11,9 @@ class CategoryController extends Controller
     {
         return Inertia::render('admin/category/index');
     }
+
+    public function create()
+    {
+        return Inertia::render('admin/category/create');
+    }
 }

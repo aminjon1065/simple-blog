@@ -1,10 +1,11 @@
 import Article from '@/components/article';
 import { Button } from '@/components/ui/button';
 import MainLayout from '@/layouts/app/main-layout';
+import { NewsItem } from '@/types/news';
 import { Link } from '@inertiajs/react';
 import { ArrowRight } from 'lucide-react';
 
-const MainPage = ({ news }) => {
+const MainPage = ({ news }: { news: NewsItem[] }) => {
     return (
         <MainLayout>
             <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -34,7 +35,7 @@ const MainPage = ({ news }) => {
                     rel="prev"
                 >
                     <div className="group flex items-center justify-center space-x-2">
-                        <span className="transform transition-transform duration-200 ease-in-out group-hover:-translate-x-1 text-xl">
+                        <span className="transform text-xl transition-transform duration-200 ease-in-out group-hover:-translate-x-1">
                             Все посты
                         </span>
                         <ArrowRight className="h-4 w-4 transform transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
