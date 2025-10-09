@@ -11,8 +11,6 @@ const News = ({
     news: PaginatedNews;
     categories: Category[];
 }) => {
-    console.log(news);
-
     return (
         <MainLayout>
             <div>
@@ -28,144 +26,162 @@ const News = ({
                                 Категории
                             </h3>
                             <ul className="space-y-3">
-                                {categories.map((category) => (
-                                    <li className="my-3" key={category.id}>
-                                        <a
-                                            href="#"
-                                            className="hover:text-primary-500 dark:hover:text-primary-500 px-3 py-2 text-sm font-medium text-gray-500 uppercase dark:text-gray-300"
-                                            aria-label="View posts tagged"
-                                        >
-                                            {category.name}
-                                        </a>
-                                    </li>
-                                ))}
+                                {categories
+                                    .filter((category) => category.status)
+                                    .map((category) => (
+                                        <li className="my-3" key={category.id}>
+                                            <Link
+                                                href="#"
+                                                className="hover:text-primary-500 dark:hover:text-primary-500 px-3 py-2 text-sm font-medium text-gray-500 uppercase dark:text-gray-300"
+                                                aria-label="View posts tagged"
+                                            >
+                                                {category.name}
+                                            </Link>
+                                        </li>
+                                    ))}
                             </ul>
                         </div>
                     </div>
                     <div>
                         <ul>
-                            {news.data.map((article: NewsItem) => (
-                                <ArticleNews
-                                    key={article.id}
-                                    article={article}
-                                />
-                            ))}
+                            {news.data.length > 0 ? (
+                                news.data.map((article: NewsItem) => (
+                                    <ArticleNews
+                                        key={article.id}
+                                        article={article}
+                                    />
+                                ))
+                            ) : (
+                                <p className="text-gray-500 dark:text-gray-400">
+                                    Новостей нет
+                                </p>
+                            )}
                         </ul>
 
-                        <div className="space-y-2 pt-6 pb-8 md:space-y-5 ">
+                        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
                             <nav className="flex items-center justify-center md:justify-between">
                                 {/* Pagination rendered below via news.links */}
                                 <div className="flex items-center space-x-2">
-                                    {news.links?.map((link, idx) => {
-                                        const isDisabled = link.url === null;
-                                        const isActive = link.active;
-                                        const isPrev =
-                                            link.label ===
-                                            'pagination.previous';
-                                        const isNext =
-                                            link.label === 'pagination.next';
-                                        const label = isPrev
-                                            ? 'Предыдущая'
-                                            : isNext
-                                              ? 'Следующая'
-                                              : link.label;
+                                    {news.data.length > 0
+                                        ? news.links?.map((link, idx) => {
+                                              const isDisabled =
+                                                  link.url === null;
+                                              const isActive = link.active;
+                                              const isPrev =
+                                                  link.label ===
+                                                  'pagination.previous';
+                                              const isNext =
+                                                  link.label ===
+                                                  'pagination.next';
+                                              const label = isPrev
+                                                  ? 'Предыдущая'
+                                                  : isNext
+                                                    ? 'Следующая'
+                                                    : link.label;
 
-                                        // Prev/Next with icons and transforms
-                                        if (isPrev || isNext) {
-                                            if (isDisabled) {
-                                                return (
-                                                    <div
-                                                        key={idx}
-                                                        className="flex cursor-not-allowed items-center space-x-2 text-gray-400 opacity-50"
-                                                    >
-                                                        {isPrev && (
-                                                            <ArrowLeft className="h-4 w-4" />
-                                                        )}
-                                                        <span className="hidden md:block">{label}</span>
-                                                        {isNext && (
-                                                            <ArrowRight className="h-4 w-4" />
-                                                        )}
-                                                    </div>
-                                                );
-                                            }
+                                              // Prev/Next with icons and transforms
+                                              if (isPrev || isNext) {
+                                                  if (isDisabled) {
+                                                      return (
+                                                          <div
+                                                              key={idx}
+                                                              className="flex cursor-not-allowed items-center space-x-2 text-gray-400 opacity-50"
+                                                          >
+                                                              {isPrev && (
+                                                                  <ArrowLeft className="h-4 w-4" />
+                                                              )}
+                                                              <span className="hidden md:block">
+                                                                  {label}
+                                                              </span>
+                                                              {isNext && (
+                                                                  <ArrowRight className="h-4 w-4" />
+                                                              )}
+                                                          </div>
+                                                      );
+                                                  }
 
-                                            if (isActive) {
-                                                return (
-                                                    <span
-                                                        key={idx}
-                                                        className="text-primary-700 px-2 font-bold flex items-center space-x-2"
-                                                    >
-                                                        {isPrev && (
-                                                            <ArrowLeft className="h-4 w-4" />
-                                                        )}
-                                                        <span className="hidden md:inline">{label}</span>
-                                                        {isNext && (
-                                                            <ArrowRight className="h-4 w-4" />
-                                                        )}
-                                                    </span>
-                                                );
-                                            }
+                                                  if (isActive) {
+                                                      return (
+                                                          <span
+                                                              key={idx}
+                                                              className="text-primary-700 flex items-center space-x-2 px-2 font-bold"
+                                                          >
+                                                              {isPrev && (
+                                                                  <ArrowLeft className="h-4 w-4" />
+                                                              )}
+                                                              <span className="hidden md:inline">
+                                                                  {label}
+                                                              </span>
+                                                              {isNext && (
+                                                                  <ArrowRight className="h-4 w-4" />
+                                                              )}
+                                                          </span>
+                                                      );
+                                                  }
 
-                                            return (
-                                                <Link
-                                                    key={idx}
-                                                    href={link.url!}
-                                                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                                                    rel={
-                                                        isPrev ? 'prev' : 'next'
-                                                    }
-                                                >
-                                                    <div className="group flex items-center justify-center space-x-2">
-                                                        {isPrev && (
-                                                            <ArrowLeft className="h-4 w-4 transform transition-transform duration-200 ease-in-out group-hover:-translate-x-1" />
-                                                        )}
-                                                        <span className="transform transition-transform duration-200 ease-in-out group-hover:translate-x-1">
-                                                            <span className="hidden md:block">
-                                                                {label}
-                                                            </span>
-                                                        </span>
-                                                        {isNext && (
-                                                            <ArrowRight className="h-4 w-4 transform transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
-                                                        )}
-                                                    </div>
-                                                </Link>
-                                            );
-                                        }
+                                                  return (
+                                                      <Link
+                                                          key={idx}
+                                                          href={link.url!}
+                                                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                                                          rel={
+                                                              isPrev
+                                                                  ? 'prev'
+                                                                  : 'next'
+                                                          }
+                                                      >
+                                                          <div className="group flex items-center justify-center space-x-2">
+                                                              {isPrev && (
+                                                                  <ArrowLeft className="h-4 w-4 transform transition-transform duration-200 ease-in-out group-hover:-translate-x-1" />
+                                                              )}
+                                                              <span className="transform transition-transform duration-200 ease-in-out group-hover:translate-x-1">
+                                                                  <span className="hidden md:block">
+                                                                      {label}
+                                                                  </span>
+                                                              </span>
+                                                              {isNext && (
+                                                                  <ArrowRight className="h-4 w-4 transform transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                                                              )}
+                                                          </div>
+                                                      </Link>
+                                                  );
+                                              }
 
-                                        // Numeric (or other) links — no transform animation
-                                        if (isDisabled) {
-                                            return (
-                                                <span
-                                                    key={idx}
-                                                    className="hidden cursor-not-allowed px-2 text-gray-400 opacity-50 md:block"
-                                                >
-                                                    {label}
-                                                </span>
-                                            );
-                                        }
+                                              // Numeric (or other) links — no transform animation
+                                              if (isDisabled) {
+                                                  return (
+                                                      <span
+                                                          key={idx}
+                                                          className="hidden cursor-not-allowed px-2 text-gray-400 opacity-50 md:block"
+                                                      >
+                                                          {label}
+                                                      </span>
+                                                  );
+                                              }
 
-                                        if (isActive) {
-                                            return (
-                                                <span
-                                                    key={idx}
-                                                    className="text-primary-700 rounded border px-3 py-2 font-bold hidden md:block"
-                                                    aria-current="page"
-                                                >
-                                                    {label}
-                                                </span>
-                                            );
-                                        }
+                                              if (isActive) {
+                                                  return (
+                                                      <span
+                                                          key={idx}
+                                                          className="text-primary-700 hidden rounded border px-3 py-2 font-bold md:block"
+                                                          aria-current="page"
+                                                      >
+                                                          {label}
+                                                      </span>
+                                                  );
+                                              }
 
-                                        return (
-                                            <Link
-                                                key={idx}
-                                                href={link.url!}
-                                                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 px-2"
-                                            >
-                                                {label}
-                                            </Link>
-                                        );
-                                    })}
+                                              return (
+                                                  <Link
+                                                      key={idx}
+                                                      href={link.url!}
+                                                      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 px-2"
+                                                  >
+                                                      {label}
+                                                  </Link>
+                                              );
+                                          })
+                                        : null}
                                 </div>
                             </nav>
                         </div>

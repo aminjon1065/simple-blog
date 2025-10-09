@@ -1,6 +1,9 @@
+
+import CategoriesTable from '@/components/categories-table';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes/admin';
 import { BreadcrumbItem } from '@/types';
+import { Category } from '@/types/news';
 import { Head } from '@inertiajs/react';
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -13,14 +16,11 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-const Index = () => {
+const Index = ({ categories }: { categories: Category[] }) => {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Категории" />
-            <span>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto,
-                vitae.
-            </span>
+            <CategoriesTable categories={categories} />
         </AppLayout>
     );
 };
