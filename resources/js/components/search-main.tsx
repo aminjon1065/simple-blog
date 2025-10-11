@@ -12,11 +12,12 @@ const SearchNain = () => {
     const [searchToggle, setsearchToggle] = useState(false);
     const searchNews = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(e.currentTarget.elements[0].value);
+        const input = e.currentTarget.elements[0] as HTMLInputElement;
+        console.log(input.value);
         router.visit(`/news`, {
             method: 'get',
             data: {
-                search: e.currentTarget.elements[0].value,
+                search: input.value,
             },
             preserveState: true,
             replace: true,

@@ -27,20 +27,20 @@ const MainPage = ({ news }: { news: NewsItem[] }) => {
                 </ul>
             </div>
             <div className="flex justify-end text-base leading-6 font-medium">
-                <Link
-                    as={Button}
-                    variant="link"
-                    href={`/news`}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    rel="prev"
-                >
-                    <div className="group flex items-center justify-center space-x-2">
-                        <span className="transform text-xl transition-transform duration-200 ease-in-out group-hover:-translate-x-1">
-                            Все посты
-                        </span>
-                        <ArrowRight className="h-4 w-4 transform transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
-                    </div>
-                </Link>
+                <Button asChild variant="link">
+                    <Link
+                        href={`/news`}
+                        className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                        rel="prev"
+                    >
+                        <div className="group flex items-center justify-center space-x-2">
+                            <span className="transform text-xl transition-transform duration-200 ease-in-out group-hover:-translate-x-1">
+                                Все посты
+                            </span>
+                            <ArrowRight className="h-4 w-4 transform transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                        </div>
+                    </Link>
+                </Button>
             </div>
         </MainLayout>
     );

@@ -9,11 +9,22 @@ use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::orderBy('name')->get();
+        $search = $request->get('search');
+
+        $categories = Category::query()
+            ->when($search, fn($query) => $query->where('name', 'like', "%{$search}%")
+                ->orWhere('slug', 'like', "%{$search}%")
+            )
+            ->orderByDesc('created_at')
+            ->paginate(15)
+            ->withQueryString();
         return Inertia::render('admin/category/index', [
             'categories' => $categories,
+            'filters' => [
+                'search' => $search,
+            ],
         ]);
     }
 

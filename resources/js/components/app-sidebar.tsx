@@ -10,7 +10,8 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import {  home } from '@/routes';
+import { home } from '@/routes';
+import { dashboard } from '@/routes/admin';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
@@ -22,7 +23,6 @@ import {
     Newspaper,
 } from 'lucide-react';
 import AppLogo from './app-logo';
-import { dashboard } from '@/routes/admin';
 
 const mainNavItems: NavItem[] = [
     {
@@ -32,7 +32,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Категоия',
-        href: '/admin/categories',
+        href: '/admin/category',
         icon: ChartBarStacked,
     },
     {

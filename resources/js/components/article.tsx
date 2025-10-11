@@ -24,15 +24,11 @@ const Article = ({ article }: {article:NewsItem}) => {
                 </dl>
                 <div className="space-y-5 xl:col-span-3">
                     <div className="space-y-6">
-                        <div>
-                            <h2 className="text-2xl leading-8 font-bold tracking-tight">
-                                <Link
-                                    href={`/news/${article.slug}`}
-                                    className="text-gray-900 dark:text-gray-100"
-                                >
-                                    {article.title}
+                            <Button asChild variant="link">
+                                <Link href={`/news/${article.slug ?? '#'}`} className="text-primary-500" rel="bookmark">
+                                    Читать далее →
                                 </Link>
-                            </h2>
+                            </Button>
                             <div className="flex flex-wrap">
                                 {article.tags.map((tag) => (
                                     <a
@@ -48,22 +44,21 @@ const Article = ({ article }: {article:NewsItem}) => {
                         <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                             {article.content}
                         </div>
-                    </div>
                     <div className="text-base leading-6 font-medium">
-                        <Link
-                            as={Button}
-                            variant="link"
-                            href={`/news/${article.slug}`}
-                            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                            rel="prev"
-                        >
-                            <div className="group flex items-center justify-center space-x-2">
-                                <span className="transform transition-transform duration-200 ease-in-out group-hover:-translate-x-1">
-                                    Прочитать
-                                </span>
-                                <ArrowRight className="h-4 w-4 transform transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
-                            </div>
-                        </Link>
+                        <Button asChild variant="link">
+                            <Link
+                                href={`/news/${article.slug}`}
+                                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                                rel="prev"
+                            >
+                                <div className="group flex items-center justify-center space-x-2">
+                                    <span className="transform transition-transform duration-200 ease-in-out group-hover:-translate-x-1">
+                                        Прочитать
+                                    </span>
+                                    <ArrowRight className="h-4 w-4 transform transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                                </div>
+                            </Link>
+                        </Button>
                     </div>
                 </div>
             </div>

@@ -9,6 +9,13 @@ use Inertia\Inertia;
 
 class NewsController extends Controller
 {
+    public function indexAdmin()
+    {
+        $news = News::with(['tags', 'category', 'author'])->orderBy('published_at', 'desc')->paginate(10);
+        return Inertia::render('admin/news/index', [
+            'news' => $news
+        ]);
+    }
     public function index()
     {
         $categories = Category::all();
