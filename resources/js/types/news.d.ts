@@ -66,3 +66,13 @@ export type PaginatedNews = {
     links?: Array<{ url: string | null; label: string; page: number | null; active: boolean }>;
 };
 
+export type PaginatedCategory = {
+    data: Category[];
+    current_page?: number;
+    last_page?: number;
+    per_page?: number;
+    total?: number;
+    prev_page_url?: string | null;
+    next_page_url?: string | null;
+    links?: Array<{ url: string | null; label: string; page: number | null; active: boolean }>;
+};
