@@ -1,4 +1,5 @@
-import CategoriesTable from '@/components/categories-table';
+import CategoriesTable from '@/components/category/categories-table';
+import CreateCategoryForm from '@/components/category/category-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import AppLayout from '@/layouts/app-layout';
@@ -73,12 +74,12 @@ const Index = ({ categories, filters }: Props) => {
                                 <PlusIcon />
                                 Добавить категорию
                             </Button>
-                            {/* {open && (
+                            {open && (
                                 <CreateCategoryForm
                                     open={open}
                                     onOpenChange={setOpen}
                                 />
-                            )} */}
+                            )}
                         </div>
                     </div>
                     <CategoriesTable categories={categories} />

@@ -1,14 +1,19 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
 use Inertia\Inertia;
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('category', [CategoryController::class, 'index'])->name('category.index');
-    Route::get('news', [NewsController::class, 'indexAdmin'])->name('news.index');
-    Route::get('/dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+//Category
+    Route::resource('category', CategoryController::class);
+    Route::patch('category-status/{category}', [CategoryController::class, 'updateToggle'])->name('category.update-toggle');
+
+    Route::get('news', [NewsController::class, 'indexAdmin'])->name('news.admin-index');
+    Route::resource('news', NewsController::class);
+    Route::patch('/news-status/{news}', [NewsController::class, 'updateToggle'])
+        ->name('admin.news.toggle');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });

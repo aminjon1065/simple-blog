@@ -39,7 +39,6 @@ export type NewsItem = {
     author?: Author;
     category_id?: number;
     category?: Category;
-    tags: Tag[];
     published_at?: string | null; // "2025-10-04 23:45:59"
     created_at?: string | null; // "2025-10-05T14:32:30.000000Z"
     updated_at?: string | null;
