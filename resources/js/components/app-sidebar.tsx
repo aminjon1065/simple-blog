@@ -11,7 +11,7 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { home } from '@/routes';
-import { dashboard } from '@/routes/admin';
+import admin, { dashboard } from '@/routes/admin';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
@@ -21,6 +21,7 @@ import {
     MailPlus,
     MessageCircle,
     Newspaper,
+    Tag,
 } from 'lucide-react';
 import AppLogo from './app-logo';
 
@@ -32,18 +33,23 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Категоия',
-        href: '/admin/category',
+        href: admin.category.index(),
         icon: ChartBarStacked,
     },
     {
         title: 'Новости',
-        href: '/admin/news',
+        href: admin.adminNews.index(),
         icon: Newspaper,
     },
     {
         title: 'Комментарии',
         href: '/admin/comments',
         icon: MessageCircle,
+    },
+    {
+        title: 'Теги',
+        href: admin.adminTags.index(),
+        icon: Tag,
     },
     {
         title: 'Подписались',

@@ -70,6 +70,9 @@ export default function CategoriesTable({ categories }: Props) {
             preserveScroll: true,
             replace: true,
             onFinish: () => setBusy(key, false),
+            onSuccess: () => {
+                toast.success('Успешно удалено');
+            },
         });
     };
 

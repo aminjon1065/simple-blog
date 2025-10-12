@@ -1,10 +1,11 @@
+import NewsForm from '@/components/news/news-form';
 import NewsTable from '@/components/news/news-table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes/admin';
 import { BreadcrumbItem } from '@/types';
-import { NewsItem } from '@/types/news';
+import { Category, NewsItem } from '@/types/news';
 import { PaginatedResponse } from '@/types/pagination-response';
 import { Head, router } from '@inertiajs/react';
 import { PlusIcon } from 'lucide-react';
@@ -27,9 +28,10 @@ type Filters = {
 type Props = {
     news: PaginatedResponse<NewsItem>;
     filters: Filters;
+    categories: Category[];
 };
 
-export default function Index({ news, filters }: Props) {
+export default function Index({ news, filters, categories }: Props) {
     const [search, setSearch] = useState(filters.search ?? '');
     const [openCreate, setOpenCreate] = useState(false);
 
@@ -84,7 +86,13 @@ export default function Index({ news, filters }: Props) {
                                 Добавить новость
                             </Button>
                             {/* Модал создания (реализуешь по аналогии с CreateCategoryForm) */}
-                            {/* {openCreate && <CreateNewsForm open={openCreate} onOpenChange={setOpenCreate} />} */}
+                            {openCreate && (
+                                <NewsForm
+                                    open={openCreate}
+                                    onOpenChange={setOpenCreate}
+                                    categories={categories}
+                                />
+                            )}
                         </div>
                     </div>
 

@@ -1,7 +1,8 @@
+import { formatDate } from '@/lib/formatDate';
 import { NewsItem } from '@/types/news';
 import { Link } from '@inertiajs/react';
 
-const ArticleNews = ({ article }:{article:NewsItem}) => {
+const ArticleNews = ({ article }: { article: NewsItem }) => {
     return (
         <li className="py-5">
             <article className="flex flex-col space-y-2 xl:space-y-0">
@@ -9,14 +10,7 @@ const ArticleNews = ({ article }:{article:NewsItem}) => {
                     <dt className="sr-only">Published on</dt>
                     <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
                         <time dateTime="2021-08-07T15:32:14.000Z">
-                            {new Date(`${article.published_at}`).toLocaleDateString(
-                                'ru-RU',
-                                {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric',
-                                },
-                            )}
+                            {formatDate(article.published_at)}
                         </time>
                     </dd>
                 </dl>
@@ -24,14 +18,14 @@ const ArticleNews = ({ article }:{article:NewsItem}) => {
                     <div>
                         <h2 className="text-2xl leading-8 font-bold tracking-tight">
                             <Link
-                                href="#"
-                                className="text-gray-900 dark:text-gray-100 text-truncate"
+                                href={`/news/${article.slug}`}
+                                className="text-truncate text-gray-900 dark:text-gray-100"
                             >
                                 {article.title}
                             </Link>
                         </h2>
                         <div className="flex flex-wrap">
-                            {article.tags.map((tag) => (
+                            {article.tags?.map((tag) => (
                                 <Link
                                     key={tag.id}
                                     href="#"
@@ -43,7 +37,9 @@ const ArticleNews = ({ article }:{article:NewsItem}) => {
                         </div>
                     </div>
                     <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                        <span className="decoration-2 text-truncate">{article.content}</span>
+                        <span className="text-truncate decoration-2">
+                            {article.content}
+                        </span>
                     </div>
                 </div>
             </article>

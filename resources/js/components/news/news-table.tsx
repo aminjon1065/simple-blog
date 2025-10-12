@@ -51,7 +51,7 @@ export default function NewsTable({ news }: Props) {
                 preserveState: true,
                 preserveScroll: true,
                 replace: true,
-                onSuccess: () => toast.success('Статус обновлён'),
+                onSuccess: () => toast.success('Успешно обновлено'),
                 onError: () => toast.error('Не удалось обновить'),
                 onFinish: () => setBusy(key, false),
             },
@@ -67,6 +67,7 @@ export default function NewsTable({ news }: Props) {
             preserveScroll: true,
             replace: true,
             onFinish: () => setBusy(key, false),
+            onSuccess: () => toast.success('Успешно удалено'),
         });
     };
 

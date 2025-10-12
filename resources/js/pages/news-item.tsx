@@ -1,7 +1,17 @@
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 import MainLayout from '@/layouts/app/main-layout';
+import { formatDate } from '@/lib/formatDate';
+import type { NewsItem } from '@/types/news';
 import { Link } from '@inertiajs/react';
+import { User2Icon } from 'lucide-react';
+type Props = {
+    newsArticle: NewsItem;
+};
 
-const NewsItem = () => {
+const ShowNewsItem = ({ newsArticle }: Props) => {
+    console.log(newsArticle);
     return (
         <MainLayout>
             <section className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">
@@ -16,48 +26,35 @@ const NewsItem = () => {
                                         </dt>
                                         <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
                                             <time dateTime="2021-05-02T00:00:00.000Z">
-                                                Sunday, May 2, 2021
+                                                {formatDate(
+                                                    newsArticle.created_at,
+                                                )}
                                             </time>
                                         </dd>
                                     </div>
                                 </dl>
                                 <div>
                                     <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14 dark:text-gray-100">
-                                        Article title
+                                        {newsArticle.title}
                                     </h1>
                                 </div>
                             </div>
                         </header>
                         <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0 dark:divide-gray-700">
                             <dl className="pt-6 pb-10 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
-                                <dt className="sr-only">Authors</dt>
+                                <dt className="sr-only">
+                                    {newsArticle.author?.name}
+                                </dt>
                                 <dd>
                                     <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-y-8 xl:space-x-0">
                                         <li className="flex items-center space-x-2">
-                                            <img
-                                                src="../assets/images/avatar.png"
-                                                width="38"
-                                                height="38"
-                                                alt="avatar"
-                                                className="h-10 w-10 rounded-full"
-                                            />
+                                            <User2Icon className="h-10 w-10 rounded-full" />
                                             <dl className="text-sm leading-5 font-medium whitespace-nowrap">
                                                 <dt className="sr-only">
                                                     Name
                                                 </dt>
                                                 <dd className="text-gray-900 dark:text-gray-100">
-                                                    John Doe
-                                                </dd>
-                                                <dt className="sr-only">
-                                                    Twitter
-                                                </dt>
-                                                <dd>
-                                                    <a
-                                                        href="#"
-                                                        className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                                                    >
-                                                        Facebook
-                                                    </a>
+                                                    {newsArticle.author?.name}
                                                 </dd>
                                             </dl>
                                         </li>
@@ -66,167 +63,57 @@ const NewsItem = () => {
                             </dl>
                             <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
                                 <div className="prose dark:prose-invert max-w-none pt-10 pb-8">
-                                    <h1 id="nested-routes">
-                                        <a
-                                            href="#nested-routes"
-                                            aria-hidden="true"
-                                            tabIndex={-1}
+                                    {newsArticle.image && (
+                                        <div
+                                            className={
+                                                'flex items-center justify-center'
+                                            }
                                         >
-                                            <span className="icon icon-link"></span>
-                                        </a>
-                                        Nested Routes
-                                    </h1>
-                                    <p>
-                                        The blog template supports posts in
-                                        nested sub-folders. This helps in
-                                        organisation and can be used to group
-                                        posts of similar content e.g. a
-                                        multi-part series. This post is itself
-                                        an example of a nested route! It's
-                                        located in the{' '}
-                                        <code>/data/blog/nested-route</code>{' '}
-                                        folder.
-                                    </p>
-                                    <h2 id="how">
-                                        <a
-                                            href="#how"
-                                            aria-hidden="true"
-                                            tabIndex={-1}
-                                        >
-                                            <span className="icon icon-link"></span>
-                                        </a>
-                                        How
-                                    </h2>
-                                    <p>
-                                        Simplify create multiple folders inside
-                                        the main <code>/data/blog</code> folder
-                                        and add your <code>.md</code>/
-                                        <code>.mdx</code> files to them. You can
-                                        even create something like{' '}
-                                        <code>
-                                            /data/blog/nested-route/deeply-nested-route/my-post.md
-                                        </code>
-                                    </p>
-                                    <p>
-                                        We use Next.js catch all routes to
-                                        handle the routing and path creations.
-                                    </p>
-                                    <h2 id="use-cases">
-                                        <a
-                                            href="#use-cases"
-                                            aria-hidden="true"
-                                            tabIndex={-1}
-                                        >
-                                            <span className="icon icon-link"></span>
-                                        </a>
-                                        Use Cases
-                                    </h2>
-                                    <p>
-                                        Here are some reasons to use nested
-                                        routes
-                                    </p>
-                                    <ul>
-                                        <li>
-                                            More logical content organisation
-                                            (blogs will still be displayed based
-                                            on the created date)
-                                        </li>
-                                        <li>Multi-part posts</li>
-                                        <li>
-                                            Different sub-routes for each author
-                                        </li>
-                                        <li>
-                                            Internationalization (though it
-                                            would be recommended to use{' '}
-                                            <a
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                                            >
-                                                Next.js built-in i8n routing
-                                            </a>
-                                            )
-                                        </li>
-                                    </ul>
-                                    <h2 id="note">
-                                        <a
-                                            href="#note"
-                                            aria-hidden="true"
-                                            tabIndex={-1}
-                                        >
-                                            <span className="icon icon-link"></span>
-                                        </a>
-                                        Note
-                                    </h2>
-                                    <ul>
-                                        <li>
-                                            The previous/next post links at
-                                            bottom of the template are currently
-                                            sorted by date. One could explore
-                                            modifying the template to refer the
-                                            reader to the previous/next post in
-                                            the series, rather than by date.
-                                        </li>
-                                    </ul>
+                                            <img
+                                                src={newsArticle.image}
+                                                alt="Image post"
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="prose dark:prose-invert max-w-none pt-10 pb-8">
+                                    {newsArticle.content}
                                 </div>
                                 <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
-                                    <a href="#" rel="nofollow">
-                                        Discuss on Twitter
-                                    </a>
-                                    •<a href="#">View on GitHub</a>
+                                    <div className="grid w-full gap-2">
+                                        <Textarea placeholder="Напистаь комментарии." />
+                                        <Button>Комментировать</Button>
+                                    </div>
                                 </div>
                             </div>
                             <footer>
-                                <div className="divide-gray-200 text-sm leading-5 font-medium xl:col-start-1 xl:row-start-2 xl:divide-y dark:divide-gray-700">
-                                    <div className="py-4 xl:py-8">
-                                        <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                                            Tags
-                                        </h2>
-                                        <div className="flex flex-wrap">
-                                            <a
-                                                href="#"
-                                                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
-                                            >
-                                                HTML
-                                            </a>
-                                            <a
-                                                href="#"
-                                                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
-                                            >
-                                                PHP
-                                            </a>
+                                {newsArticle.tags?.length ? (
+                                    <div className="divide-gray-200 text-sm leading-5 font-medium xl:divide-y dark:divide-gray-700">
+                                        <div className="py-4 xl:py-8">
+                                            <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                                                Теги
+                                            </h2>
+                                            <ul className="mt-2 flex flex-wrap gap-2">
+                                                {newsArticle.tags.map((tag) => (
+                                                    <Badge
+                                                        variant="default"
+                                                        key={tag.id}
+                                                    >
+                                                        {/* Если есть slug у тега — замени href на /tags/{slug} */}
+                                                        {tag.name}
+                                                    </Badge>
+                                                ))}
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-                                        <div>
-                                            <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                                                Previous Article
-                                            </h2>
-                                            <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                                                <a href="#">
-                                                    Article with banner
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                                                Next Article
-                                            </h2>
-                                            <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                                                <a href="article-simple.html">
-                                                    Simple article
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                ) : null}
                                 <div className="pt-4 xl:pt-8">
                                     <Link
                                         href="/news"
                                         className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                                         aria-label="Back to the blog"
                                     >
-                                        &larr; Back to the blog
+                                        &larr; Все новости
                                     </Link>
                                 </div>
                             </footer>
@@ -238,4 +125,4 @@ const NewsItem = () => {
     );
 };
 
-export default NewsItem;
+export default ShowNewsItem;
