@@ -4,47 +4,91 @@ import {
     PopoverTrigger,
 } from '@/components/ui/popover';
 import { router } from '@inertiajs/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Search } from 'lucide-react';
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Input } from './ui/input';
 
 const SearchNain = () => {
-    const [searchToggle, setsearchToggle] = useState(false);
-    const searchNews = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const input = e.currentTarget.elements[0] as HTMLInputElement;
-        console.log(input.value);
-        router.visit(`/news`, {
-            method: 'get',
-            data: {
-                search: input.value,
-            },
-            preserveState: true,
-            replace: true,
-        });
-        setsearchToggle(false);
+    const [open, setOpen] = useState(false);
+    const [q, setQ] = useState('');
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const onOpenChange = (next: boolean) => {
+        setOpen(next);
+        if (next) {
+            // фокус после открытия
+            setTimeout(() => inputRef.current?.focus(), 0);
+        } else {
+            setQ('');
+        }
     };
+
+    const onSubmit = useCallback(
+        (e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            const search = q.trim();
+            if (!search) {
+                setOpen(false);
+                return;
+            }
+
+            router.get(
+                '/news',
+                { search },
+                {
+                    preserveState: true,
+                    preserveScroll: true,
+                    replace: true,
+                    // only: ['news'], // если используешь partial reload
+                },
+            );
+
+            setOpen(false);
+        },
+        [q],
+    );
+
+    const clear = () => setQ('');
     return (
-        <Popover open={searchToggle} onOpenChange={setsearchToggle}>
-            <PopoverTrigger asChild>
-                <button
-                    aria-label="Search"
-                    className="cursor-pointer rounded-md p-2 transition hover:bg-gray-200 dark:hover:bg-gray-700"
-                >
-                    <Search className="h-5 w-5 text-gray-900 dark:text-gray-100" />
-                </button>
-            </PopoverTrigger>
-            <PopoverContent className="p-0 dark:bg-gray-900">
-                <form onSubmit={searchNews}>
-                    <Input
-                        type="text"
-                        placeholder="Search..."
-                        className="border-0 focus:ring-0"
+        <>
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm"
+                        onClick={() => setOpen(false)}
                     />
-                </form>
-            </PopoverContent>
-        </Popover>
+                )}
+            </AnimatePresence>
+
+            <Popover open={open} onOpenChange={onOpenChange}>
+                <PopoverTrigger asChild>
+                    <button
+                        type="button"
+                        aria-label="Search"
+                        className="cursor-pointer rounded-md p-2 transition hover:bg-gray-200 dark:hover:bg-gray-700"
+                    >
+                        <Search className="h-5 w-5 text-gray-900 dark:text-gray-100" />
+                    </button>
+                </PopoverTrigger>
+
+                <PopoverContent className="relative z-50 w-72 rounded-xl border border-white/10 bg-white/70 p-2 shadow-xl backdrop-blur-md dark:bg-gray-900/70">
+                    <form onSubmit={onSubmit}>
+                        <Input
+                            ref={inputRef}
+                            name="search"
+                            placeholder="Search..."
+                            value={q}
+                            onChange={(e) => setQ(e.target.value)}
+                            className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                        />
+                    </form>
+                </PopoverContent>
+            </Popover>
+        </>
     );
 };
-
 export default SearchNain;

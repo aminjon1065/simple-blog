@@ -54,7 +54,6 @@ class AdminNewsController extends Controller
             ->withQueryString();
 
         $categories = Category::query()
-            ->where('status', 1)            // если у тебя есть поле статус
             ->select('id', 'name')
             ->orderBy('name')
             ->get();

@@ -18,6 +18,7 @@ export type Category = {
     status?: number | boolean;
     created_at?: string | null;
     updated_at?: string | null;
+    news_count?: number;
 };
 
 export type Tag = {
@@ -29,6 +30,7 @@ export type Tag = {
 };
 
 export type NewsItem = {
+
     id: number;
     title: string;
     slug?: string;
@@ -52,6 +54,7 @@ export type NewsItem = {
     views?: number;
     status?: number | boolean;
     tags?: Tag[] | null; // assuming tags is an array of Tag objects
+    comments?: CommentNode[] | null;
 };
 
 export type PaginatedNews = {
@@ -74,4 +77,13 @@ export type PaginatedCategory = {
     prev_page_url?: string | null;
     next_page_url?: string | null;
     links?: Array<{ url: string | null; label: string; page: number | null; active: boolean }>;
+};
+
+
+export type CommentNode = {
+    id: number;
+    comment: string;
+    created_at: string;
+    user: { id: number; name: string };
+    children?: CommentNode[];
 };

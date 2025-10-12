@@ -83,10 +83,10 @@ export default function MainLayout({
                                 </Link>
                                 <Link
                                     prefetch
-                                    href="tags"
+                                    href="/cats"
                                     className="hidden font-medium text-gray-900 sm:block dark:text-gray-100"
                                 >
-                                    Теги
+                                    Категории
                                 </Link>
 
                                 <Link

@@ -31,7 +31,7 @@ const News = ({
                                     .map((category) => (
                                         <li className="my-3" key={category.id}>
                                             <Link
-                                                href="#"
+                                                href={`/news?category=${category.id}`}
                                                 className="hover:text-primary-500 dark:hover:text-primary-500 px-3 py-2 text-sm font-medium text-gray-500 uppercase dark:text-gray-300"
                                                 aria-label="View posts tagged"
                                             >

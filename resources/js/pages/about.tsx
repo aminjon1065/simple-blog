@@ -1,4 +1,5 @@
 import MainLayout from '@/layouts/app/main-layout';
+import { UserCircle } from 'lucide-react';
 
 const About = () => {
     return (
@@ -7,49 +8,27 @@ const About = () => {
                 <div className="divide-y divide-gray-200 dark:divide-gray-700">
                     <div className="space-y-2 pt-6 pb-8 md:space-y-5">
                         <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-                            About
+                            О нас
                         </h1>
                     </div>
                     <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:space-y-0 xl:gap-x-8">
                         <div className="flex flex-col items-center space-x-2 pt-8">
-                            <img
-                                src="../assets/images/avatar.png"
-                                alt="avatar"
-                                width="192"
-                                height="192"
-                                className="h-48 w-48 rounded-full"
-                            />
+                            <UserCircle className="h-36 w-36 rounded-full" />
                             <h3 className="pt-4 pb-2 text-2xl leading-8 font-bold tracking-tight">
-                                John Doe
+                                Admin Admin4ik
                             </h3>
                             <div className="text-gray-500 dark:text-gray-400">
-                                Professor of Atmospheric Science
+                                Full-stack developer
                             </div>
                             <div className="text-gray-500 dark:text-gray-400">
-                                Stanford University
+                                TNU
                             </div>
                             <div className="flex space-x-3 pt-6">
                                 <a
                                     className="text-sm text-gray-500 transition hover:text-gray-600"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    href="#"
-                                >
-                                    <span className="sr-only">Facebook</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        className="hover:text-primary-500 dark:hover:text-primary-400 h-6 w-6 fill-current text-gray-700 dark:text-gray-200"
-                                    >
-                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
-                                    </svg>
-                                </a>
-
-                                <a
-                                    className="text-sm text-gray-500 transition hover:text-gray-600"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    href="#"
+                                    href="https://github.com/aminjon1065"
                                 >
                                     <span className="sr-only">Github</span>
                                     <svg
@@ -65,7 +44,7 @@ const About = () => {
                                     className="text-sm text-gray-500 transition hover:text-gray-600"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    href="#"
+                                    href="https://www.linkedin.com/in/aminjon1065/"
                                 >
                                     <span className="sr-only">Linkedin</span>
                                     <svg
@@ -80,20 +59,41 @@ const About = () => {
                         </div>
                         <div className="prose dark:prose-invert max-w-none pt-8 pb-8 xl:col-span-2">
                             <p>
-                                Tails Azimuth is a professor of atmospheric
-                                sciences at the Stanford AI Lab. His research
-                                interests includes complexity modelling of
-                                tailwinds, headwinds and crosswinds.
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Dicta laboriosam molestiae
+                                optio, quasi quidem quisquam quod similique
+                                veniam. Impedit, quibusdam.
                             </p>
-
                             <p>
-                                He leads the clean energy group which develops
-                                3D air pollution-climate models, writes
-                                differential equation solvers, and manufactures
-                                titanium plated air ballons. In his free time he
-                                bakes raspberry pi.
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Delectus dolore eum fuga
+                                harum, magnam nihil non officia praesentium
+                                repellat repudiandae!
                             </p>
-
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Sed neque elit, tristique
+                                placerat feugiat ac, facilisis vitae arcu. Proin
+                                eget egestas augue. Praesent ut sem nec arcu
+                                pellentesque aliquet. Duis dapibus diam vel
+                                metus tempus vulputate.
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Sed neque elit, tristique
+                                placerat feugiat ac, facilisis vitae arcu. Proin
+                                eget egestas augue. Praesent ut sem nec arcu
+                                pellentesque aliquet. Duis dapibus diam vel
+                                metus tempus vulputate.
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Sed neque elit, tristique
+                                placerat feugiat ac, facilisis vitae arcu. Proin
+                                eget egestas augue. Praesent ut sem nec arcu
+                                pellentesque aliquet. Duis dapibus diam vel
+                                metus tempus vulputate.
+                            </p>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur
                                 adipiscing elit. Sed neque elit, tristique

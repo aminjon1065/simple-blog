@@ -17,7 +17,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
     {
         title: 'Категории',
-        href: '/dashboard/admin/categories',
+        href: '/admin/categories',
     },
 ];
 
