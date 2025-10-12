@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewsCreated;
 use App\Http\Requests\NewsRequest;
 use App\Models\Category;
 use App\Models\News;
@@ -140,6 +141,8 @@ class AdminNewsController extends Controller
                 'published_at' => $publishedAt,
             ]);
 
+            broadcast(new NewsCreated($news));
+            //            event(new NewsCreated($news));
             // Теги (если присланы)
             if (!empty($v['tag_ids'])) {
                 $news->tags()->sync($v['tag_ids']);

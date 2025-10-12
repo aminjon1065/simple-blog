@@ -25,8 +25,7 @@ export default function AuthSimpleLayout({
                         >
                             <div className="mb-1 flex h-9 w-9 items-center justify-center rounded-md">
                                 <div className="flex flex-col items-center justify-center">
-                                    <FeatherIcon className="size-9 fill-current text-[var(--foreground)] dark:text-white" />
-
+                                    <FeatherIcon className="size-9 text-[var(--foreground)] dark:text-white" />
                                     {/*<AppLogoIcon className="size-9 fill-current text-[var(--foreground)] dark:text-white" />*/}
                                     <h3>SilentNoir</h3>
                                 </div>

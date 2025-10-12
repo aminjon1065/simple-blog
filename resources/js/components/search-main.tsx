@@ -49,7 +49,6 @@ const SearchNain = () => {
         [q],
     );
 
-    const clear = () => setQ('');
     return (
         <>
             <AnimatePresence>
@@ -75,7 +74,7 @@ const SearchNain = () => {
                     </button>
                 </PopoverTrigger>
 
-                <PopoverContent className="relative z-50 w-72 rounded-xl border border-white/10 bg-white/70 p-2 shadow-xl backdrop-blur-md dark:bg-gray-900/70">
+                <PopoverContent className="relative z-50 w-72 rounded-xl bg-white/70 p-0 shadow-xl backdrop-blur-md dark:bg-gray-900/70">
                     <form onSubmit={onSubmit}>
                         <Input
                             ref={inputRef}

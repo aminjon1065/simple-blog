@@ -1,9 +1,11 @@
 import Footer from '@/components/footer';
 import SearchMain from '@/components/search-main';
 import { initializeTheme, useAppearance } from '@/hooks/useAppearance';
+import { NewsItem } from '@/types/news';
 import { Link } from '@inertiajs/react';
 import { FeatherIcon, MoonIcon, SunIcon } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
+import { toast, Toaster } from 'sonner';
 
 export default function MainLayout({
     children,
@@ -13,10 +15,44 @@ export default function MainLayout({
     const [showMenu, setShowMenu] = useState(false);
     const { appearance, updateAppearance } = useAppearance();
     const menuRef = useRef<HTMLDivElement | null>(null);
+    const boundRef = useRef(false);
 
-    // Initialize theme on mount (applies saved appearance and hooks system changes)
     useEffect(() => {
         initializeTheme();
+    }, []);
+
+    useEffect(() => {
+        if (!window.Echo) return;
+        if (boundRef.current) return;
+        boundRef.current = true;
+
+        const ch = window.Echo.channel('news');
+        const handler = (e: NewsItem) => {
+            console.log('[Echo] news.created', e);
+            if (window.location.pathname === `/news/${e.slug}`) return;
+            toast.success(
+                <div>
+                    <div className="font-semibold">📰 Новость</div>
+                    <div className="mt-3">
+                        <Link
+                            href={`/news/${e.slug}`}
+                            className="underline-offset-2 hover:underline"
+                            onClick={() => toast.dismiss()}
+                        >
+                            Читать →
+                        </Link>
+                    </div>
+                </div>,
+            );
+        };
+
+        ch.listen('.news.created', handler);
+
+        return () => {
+            // Чистим корректно, чтобы StrictMode не давал дублей в dev
+            ch.stopListening('.news.created');
+            boundRef.current = false;
+        };
     }, []);
 
     // Prevent body scroll when menu is open
@@ -192,13 +228,13 @@ export default function MainLayout({
                                         </div>
                                         <div className="px-12 py-4">
                                             <Link
-                                                href="/tags"
+                                                href="/cats"
                                                 className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
                                                 onClick={() =>
                                                     setShowMenu(false)
                                                 }
                                             >
-                                                Теги
+                                                Категории
                                             </Link>
                                         </div>
 
@@ -222,6 +258,7 @@ export default function MainLayout({
                     </div>
                 </section>
             </div>
+            <Toaster closeButton />
         </>
     );
 }

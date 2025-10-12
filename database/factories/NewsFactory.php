@@ -25,7 +25,7 @@ class NewsFactory extends Factory
             'is_published' => $this->faker->boolean(80), // 80% chance of being true
             'published_at' => $this->faker->dateTimeBetween('-1 years', 'now'),
             'author_id' => 1,
-            'image' => $this->faker->imageUrl(640, 480, 'news', true),
+            'image' => '/news-image/1.webp',
             'meta_title' => $this->faker->sentence(),
             'meta_description' => $this->faker->sentence(),
             'is_breaking_news' => $this->faker->boolean(),

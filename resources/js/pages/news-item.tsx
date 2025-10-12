@@ -110,7 +110,7 @@ const ShowNewsItem = ({ newsArticle }: Props) => {
                                 </dd>
                             </dl>
                             <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
-                                <div className="prose dark:prose-invert max-w-none pt-10 pb-8">
+                                <div className="prose dark:prose-invert max-w-none pt-10 pb-8 w-full">
                                     {newsArticle.image && (
                                         <div
                                             className={
@@ -121,6 +121,7 @@ const ShowNewsItem = ({ newsArticle }: Props) => {
                                                 <img
                                                     src={newsArticle.image}
                                                     alt="Image post"
+                                                    className={"rounded-md w-full"}
                                                 />
                                             )}
                                         </div>
