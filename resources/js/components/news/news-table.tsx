@@ -27,7 +27,6 @@ type Props = {
 export default function NewsTable({ news }: Props) {
     const items = useMemo(() => news?.data ?? [], [news?.data]);
 
-    // loading map: "<id>:field"
     const [loading, setLoading] = useState<Record<string, boolean>>({});
     const setBusy = (key: string, val: boolean) =>
         setLoading((s) => ({ ...s, [key]: val }));
