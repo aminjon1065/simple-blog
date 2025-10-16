@@ -7,85 +7,96 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Str;
 
 class AdminCategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Category::class, 'category');
+    }
+
     public function index(Request $request): Response
     {
-        $search = $request->get('search');
+        $search = $request->string('search')->toString();
 
         $categories = Category::query()
-            ->when($search, fn($query) => $query->where('name', 'like', "%{$search}%")
-                ->orWhere('slug', 'like', "%{$search}%")
-            )
+            ->when($search, function ($q) use ($search) {
+                $q->where(function ($qq) use ($search) {
+                    $qq->where('name', 'like', "%{$search}%")
+                        ->orWhere('slug', 'like', "%{$search}%");
+                });
+            })
             ->orderByDesc('created_at')
             ->paginate(15)
             ->withQueryString();
+
         return Inertia::render('admin/category/index', [
             'categories' => $categories,
-            'filters' => [
-                'search' => $search,
-            ],
+            'filters' => ['search' => $search],
         ]);
     }
 
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('admin/category/create');
     }
 
-    public function edit($id)
+    public function edit(Category $category): Response
     {
-        $category = Category::findOrFail($id);
         return Inertia::render('admin/category/edit', compact('category'));
     }
 
-    public function show($id)
+    public function show(Category $category): Response
     {
-        $category = Category::findOrFail($id);
         return Inertia::render('admin/category/show', compact('category'));
     }
 
-    public function store(CategoryRequest $request)
+    public function store(CategoryRequest $request): RedirectResponse
     {
-
         $data = $request->validated();
-        $data['slug'] = str()->slug($data['name']);
-        $data['status'] = $request->status;
-        $data['show_at_nav'] = $request->show_at_nav;
+
+        $data['slug'] = Str::slug($data['name']);
+        $data['status'] = (bool)$request->boolean('status', true);
+        $data['show_at_nav'] = (bool)$request->boolean('show_at_nav', true);
+
         Category::create($data);
-        return redirect()->back()
-            ->with('success', "Категория успешно создана.");
+
+        return back()->with('success', 'Категория успешно создана.');
     }
 
-    public function updateToggle(Request $request, Category $category)
+    public function updateToggle(Request $request, Category $category): RedirectResponse
     {
+        $this->authorize('toggle', $category);
+
         $data = $request->validate([
             'field' => ['required', 'in:status,show_at_nav'],
             'value' => ['required', 'boolean'],
         ]);
-        $field = $data['field'];
-        $value = (bool)$data['value'];
-        $category->{$field} = $value;
+
+        $category->{$data['field']} = (bool)$data['value'];
         $category->save();
-        return redirect()->back()->with('success', 'Успешно обновлено');
+
+        return back()->with('success', 'Успешно обновлено.');
     }
 
-    public function update(CategoryRequest $request, $id)
+    public function update(CategoryRequest $request, Category $category): RedirectResponse
     {
-        $category = Category::findOrFail($id);
         $data = $request->validated();
-        $data['slug'] = str()->slug($data['name']);
+        $data['slug'] = Str::slug($data['name']);
+
         $category->update($data);
-        return redirect()->back()
-            ->with('success', "Категория '{$category->name}' успешно обновлена.");
+
+        return back()->with('success', "Категория '{$category->name}' успешно обновлена.");
     }
 
-    public function destroy($id)
+    public function destroy(Category $category): RedirectResponse
     {
-        $category = Category::findOrFail($id);
         $name = $category->name;
         $category->delete();
-        return redirect()->back()->with('success', "Категория '{$name}' успешно удалена.");
+
+        return back()->with('success', "Категория '{$name}' успешно удалена.");
     }
 }

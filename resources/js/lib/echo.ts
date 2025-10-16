@@ -16,9 +16,9 @@ if (!window.Echo) {
         wsHost: import.meta.env.VITE_REVERB_HOST ?? window.location.hostname,
         wsPort: Number(import.meta.env.VITE_REVERB_PORT ?? 8080),
         wssPort: Number(import.meta.env.VITE_REVERB_PORT ?? 8080),
-        forceTLS: true, // у тебя wss — оставь true
+        forceTLS: true,
         enabledTransports: ['ws', 'wss'],
     });
 }
 
-export {}; // ничего не экспортируем — только side-effect
+export {};
